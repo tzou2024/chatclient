@@ -1,16 +1,11 @@
-# chatclient
+# Notes
 
 
-## Chat Room
+## Notes
 
-A website where users can sign in to different chat rooms and chat with
-other users.
+A minimalist website where users can take/organize notes in folders.
 
-This project will require real time messaging with Socket.io
-- General tutorial, not specific to using socket.io with React https://socket.io/get-started/chat/
-- Tutorial for using socket.io with Express and React https://www.valentinog.com/blog/socket-react/
-- Back end docs https://socket.io/docs/server-api/
-- Front end docs https://socket.io/docs/client-api/
+This project will utilize Django a Django Backend Api and React frontend
 
 ### MVP User Stories
 
@@ -21,16 +16,27 @@ This project will require real time messaging with Socket.io
 - As a signed in user, I would like to sign out.
 - As a signed in user, I would like to send a chat message (socket)
 
-- As a signed in user in a room, I would like to see the messages in a chat (socket)
-- As a signed in user in a room, I would like create my own profile
-- As a signed in user in a room, I would like to update my own profile
-- As a signed in user in a room, I would like to delete my profile
+- As a signed in user I would like to create a folder with a name a description
+  
+- As a signed in user I would like to create a note with Title and content
+  
+- As a signed in user I would like to update my notes
+
+- As a signed in user I would like to update my folders
+  
+### Goals
+
+-  Use Redux or Context for state management
+-  Use Django for API
+- Nice UI using Chakra UI or other styling library
 
 ### Reach Goal(s)
 
-- Allow for users to create and join different chat rooms
-- Allow for realtime notifications on typing or unread messages
-- Allow users to send private messages.
+- Have a real text editor with fonts and bulleted lists ect to make notes
+- Incorperate file upload with notes
+- Share notes with other users
+- Collaborative notes
+  
 
 ## Route Table
 
@@ -43,42 +49,47 @@ This project will require real time messaging with Socket.io
    | PATCH  | `/change-password/` | `users # changepw`  |
    | DELETE | `/sign-out/`        | `users # signout `  |
 
-   - ### Chat
+ - ### Folders
    | Verb   | URI Pattern | Controller#Action    |
    | ------ | ----------- | -------------------- |
-   | GET    | `/chatrooms` | `chatrooms # index` |
-   | GET    | `/chatrooms/:chatroomId` | `chatrooms # show` |
-   | GET    | `/mychatrooms`| `chatrooms # personal show` |
-   | POST   | `/chatrooms` | `chatroom # add` |
-   | PATCH  | `/chatrooms/:chatroomId`  | `chatrooms # update`|
-   | DELETE | `/chatrooms/:chatroomId`  | `chatrooms # destroy`|
+   | GET    | `/folders` | `folders # index` |
+   | GET    | `/folders/:folderId` | `folders # show` |
+   | GET    | `/myfolders`| `folders # personal show` |
+   | POST   | `/folders` | `folder # add` |
+   | PATCH  | `/folders/:folderId`  | `folders # update`|
+   | DELETE | `/folders/:folderId`  | `folders # destroy`|
 
-   ## Schema
+ - ### Notes
+   | Verb   | URI Pattern | Controller#Action    |
+   | ------ | ----------- | -------------------- |
+   | GET    | `/foldes/:folderId/notes` | `notes # index` |
+   | GET    | `/folders/:folderID/notes/:noteId` | `notes # show` |
+   | POST   | `/folders/:folderID/notes` | `note # add` |
+   | PATCH  | `/folders/:folderID/notes/:noteId`  | `fnote # update`|
+   | DELETE | `/folders/:folderID/notes/:noteId`  | `fnote # destroy`|
+
+## Schema
 
  - ### User
    - email: string
        - required
        - unique
-   - name: string
-       - required
-       - unique
    - hashedPassword: string
        - required
-   - profile pick: string (url)
    - token: string
    - timestamps
 
- - ### Chatroom
+ - ### folder
    - name: string
        - required
        - unique
-   - members: [{Users}]
-   - messages: {{ message Schema}}
-   - ChatOwner: {User}
+   - description: string 
+   - notes: {{ note Schema}}
    - token: string
    - timestamps
 
- - ### Message
+ - ### note
    - author: {User}
-   - content: {String}
+   - title: String
+   - content: String
   
