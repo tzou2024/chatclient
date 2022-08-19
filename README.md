@@ -90,3 +90,5 @@ This project will utilize Django a Django Backend Api and React frontend
    - title: String
    - content: String
   
+  ## Wireframes
+  ![Wireframes](wireframes.jpg)
