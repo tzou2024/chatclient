@@ -1,9 +1,6 @@
 # Notes
 
-
-## Notes
-
-A minimalist website where users can take/organize notes in folders.
+Website where users can take/organize notes in folders.
 
 This project will utilize Django a Django Backend Api and React frontend
 
